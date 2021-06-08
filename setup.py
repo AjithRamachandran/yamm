@@ -1,4 +1,4 @@
-VERSION='0.1.dev0'
+VERSION='0.9dev0'
 
 from setuptools import setup, Extension
 
