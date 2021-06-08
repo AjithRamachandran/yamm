@@ -1,67 +1,68 @@
 #ifndef YAMMPY_H
 #define YAMMPY_H
 
-#include <Python.h>
+/******************************************
+new functions implemented for yammpy module
+*******************************************/
 
-/* constants */
+PyDoc_STRVAR(yammpy_degrees_doc, "Converts angle x radians to degrees");
 
-#ifndef PI
-#define PI 3.1415926535897932384626433832795029L
-#endif
+#define YAMMPY_DEGREES_METHODDEF  \
+    {"degrees", (PyCFunction)yammpy_degree, METH_O, yammpy_degrees_doc},
 
-#ifndef E
-#define E 2.7182818284590452353602874713526625L
-#endif
+PyDoc_STRVAR(yammpy_radians_doc, "Converts angle x radians to degrees");
 
-#ifndef TAU
-#define TAU 6.2831853071795864769252867665590057683943L
-#endif
+#define YAMMPY_RADIANS_METHODDEF  \
+    {"radians", (PyCFunction)yammpy_radian, METH_O, yammpy_radians_doc},
 
-#ifndef PHI
-#define PHI 1.61803398874989484820L
-#endif
+PyDoc_STRVAR(yammpy_lcm_doc, "Returns the lcm of numbers in an array.");
 
-#ifndef WAL
-#define WAL 2.09455148154232659148L
-#endif
+#define YAMMPY_LCM_METHODDEF   \
+    {"lcm", (PyCFunction)yammpy_lcm, METH_O, yammpy_lcm_doc},
 
-/*
-function wrapper for <math.h> functions
-*/
+PyDoc_STRVAR(yammpy_gcd_doc, "Returns the gcd of numbers in an array.");
 
-static PyObject* yammpy_func(PyObject* , double (*)(double));
+#define YAMMPY_GCD_METHODDEF   \
+    {"gcd", (PyCFunction)yammpy_gcd, METH_O, yammpy_gcd_doc},
 
-#define FUNC(funcname, func, docstring)                                     \
-    static PyObject* yammpy_##funcname(PyObject* self, PyObject* args) {    \
-        return yammpy_func(args, func);                                     \
-    }                                                                       \
-    PyDoc_STRVAR(yammpy_##funcname##_doc, docstring);
+PyDoc_STRVAR(yammpy_ncr_doc, "Returns the ncr of x.");
 
+#define YAMMPY_NCR_METHODDEF   \
+    {"ncr", (PyCFunction)yammpy_ncr, METH_O, yammpy_ncr_doc},
 
-/*
-wrap functions from <math.h> library 
-*/
+PyDoc_STRVAR(yammpy_isfinite_doc, "Returns if x is finite or not.");
 
-FUNC(acos, acos, "Returns the arc cosine of x (arccos(x)) in the range [0 ; π].")
-FUNC(acosh, acosh, "Returns the inverse hyperbolic cosine of arg (cosh^-1(arg), or arcosh(arg)) on the interval [0, +∞].")
-FUNC(asin, asin, "Returns the arc sine of x (arcsin(x)) in the range [-(π/2) ; +(π/2).")
-FUNC(asinh, asinh, "Returns the inverse hyperbolic sine of arg (sinh^-1(arg), or arsinh(arg).")
-FUNC(atan, atan, "Returns the arc tangent of x (arctan(x)) in the range [-(π/2) ; +(π/2)].")
-FUNC(atanh, atanh, "Returns the inverse hyperbolic tangent of arg (tanh^-1(arg), or artanh(arg)).")
-FUNC(cos, cos, "Returns the sine of x (cos(x)) in the range [-1 ; +1].")
-FUNC(cosh, cosh, "Returns the hyperbolic cosine of arg (cosh(arg), or (((e^arg)+(e^-arg))/2).")
-FUNC(erf, erf, "Returns value of the error function of x.")
-FUNC(erfc, erfc, "Returns value of the complementary error function of x.")
-FUNC(exp, exp, "Returns  the base-e exponential of arg (e^arg).")
-FUNC(expm1, expm1, "Returns e^arg-1.")
-FUNC(fabs, fabs, "Returns the absolute value of floating point value x.")
-FUNC(gamma, tgamma, "Returns the value of the gamma function of x.")
-FUNC(lgamma, lgamma, "Returns the value of the logarithm of the gamma function of x.")
-FUNC(log1p, log1p, "Returns ln(1+arg)")
-FUNC(sin, sin, "Returns the sine of x (sin(x)) in the range [-1 ; +1].")
-FUNC(sinh, sinh, "Returns the hyperbolic sine of x (sinh(x), or (((e^arg)-(e^-arg))/2)")
-FUNC(sqrt, sqrt, "Returns square root of x.")
-FUNC(tan, tan, "Returns the sine of x (tan(x)).")
-FUNC(tanh, tanh, "Returns the hyperbolic tangent of arg (tanh(arg), or (((e^arg)-(e^-arg))/((e^arg)+(e^-arg)))")
+#define YAMMPY_ISFINITE_METHODDEF  \
+    {"isfinite", (PyCFunction)yammpy_isfinite, METH_O, yammpy_isfinite_doc},
+
+PyDoc_STRVAR(yammpy_isinf_doc, "Returns if x is infinity or not.");
+
+#define YAMMPY_ISINF_METHODDEF  \
+    {"isinf", (PyCFunction)yammpy_isinf, METH_O, yammpy_isinf_doc},
+
+PyDoc_STRVAR(yammpy_isnan_doc, "Returns if x is NaN.");
+
+#define YAMMPY_ISNAN_METHODDEF  \
+    {"isnan", (PyCFunction)yammpy_isnan, METH_O, yammpy_isnan_doc},
+
+PyDoc_STRVAR(yammpy_isperfsqr_doc, "Returns if x is NaN.");
+
+#define YAMMPY_ISPERFSQR_METHODDEF  \
+    {"isperfsqr", (PyCFunction)yammpy_isperfsqr, METH_O, yammpy_isperfsqr_doc},
+
+PyDoc_STRVAR(yammpy_sum_doc, "Returns sum of values of array.");
+
+#define YAMMPY_SUM_METHODDEF  \
+    {"sum", (PyCFunction)yammpy_sum, METH_O, yammpy_sum_doc},
+
+PyDoc_STRVAR(yammpy_prod_doc, "Returns product of values of array.");
+
+#define YAMMPY_PROD_METHODDEF  \
+    {"prod", (PyCFunction)yammpy_prod, METH_O, yammpy_prod_doc},
+
+PyDoc_STRVAR(yammpy_factorial_doc, "Returns factorial of x.");
+
+#define YAMMPY_FACTORIAL_METHODDEF  \
+    {"factorial", (PyCFunction)yammpy_factorial, METH_O, yammpy_factorial_doc},
 
 #endif // YAMMPY_H
